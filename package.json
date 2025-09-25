@@ -1,0 +1,124 @@
+{
+  "name": "business-consulting-website",
+  "version": "2.0.0",
+  "description": "موقع ويب احترافي ومتطور لشركات الاستشارات التجارية مع دعم كامل للغتين العربية والإنجليزية ووضع الإضاءة المظلمة",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server -p 8080 -c-1 --gzip",
+    "dev": "npx live-server --port=3000 --entry-file=index.html --watch=css,js",
+    "build": "npm run minify && npm run optimize",
+    "serve": "npx serve -s . -l 8080",
+    "test": "npm run lighthouse && npm run validate",
+    "lighthouse": "npx lighthouse http://localhost:8080 --output=html --output-path=./reports/lighthouse.html",
+    "validate": "npx html-validate index.html",
+    "minify": "npm run minify-css && npm run minify-js",
+    "minify-css": "npx clean-css-cli css/*.css -o dist/styles.min.css",
+    "minify-js": "npx terser js/*.js -o dist/scripts.min.js",
+    "optimize": "npm run optimize-images && npm run generate-webp",
+    "optimize-images": "npx imagemin images/* --out-dir=images/optimized",
+    "generate-webp": "npx cwebp-bin images/*.{jpg,jpeg,png} -o images/webp/",
+    "deploy": "npm run build && npm run deploy-netlify",
+    "deploy-netlify": "npx netlify deploy --prod --dir=.",
+    "deploy-vercel": "npx vercel --prod",
+    "analyze": "npm run analyze-bundle && npm run analyze-performance",
+    "analyze-bundle": "npx bundlesize",
+    "analyze-performance": "npm run lighthouse",
+    "format": "npx prettier --write *.html css/*.css js/*.js",
+    "lint": "npm run lint-html && npm run lint-css && npm run lint-js",
+    "lint-html": "npx htmlhint *.html",
+    "lint-css": "npx stylelint css/*.css",
+    "lint-js": "npx eslint js/*.js"
+  },
+  "keywords": [
+    "business-consulting",
+    "website",
+    "arabic",
+    "english",
+    "responsive",
+    "pwa",
+    "dark-mode",
+    "rtl",
+    "ltr",
+    "bootstrap",
+    "javascript",
+    "css3",
+    "html5",
+    "seo-optimized",
+    "accessibility",
+    "performance"
+  ],
+  "author": {
+    "name": "Business Consulting Team",
+    "email": "info@business-consulting.com",
+    "url": "https://business-consulting.example.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/username/business-consulting-website.git"
+  },
+  "bugs": {
+    "url": "https://github.com/username/business-consulting-website/issues"
+  },
+  "homepage": "https://business-consulting.example.com",
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie < 11"
+  ],
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "bundlesize": "^0.18.1",
+    "clean-css-cli": "^5.6.2",
+    "eslint": "^8.0.0",
+    "html-validate": "^8.0.0",
+    "htmlhint": "^1.1.4",
+    "http-server": "^14.1.1",
+    "imagemin": "^8.0.1",
+    "imagemin-cli": "^7.0.0",
+    "lighthouse": "^11.0.0",
+    "live-server": "^1.2.2",
+    "netlify-cli": "^17.0.0",
+    "prettier": "^3.0.0",
+    "serve": "^14.2.1",
+    "stylelint": "^15.0.0",
+    "terser": "^5.19.0",
+    "vercel": "^32.0.0"
+  },
+  "bundlesize": [
+    {
+      "path": "css/*.css",
+      "maxSize": "150kb"
+    },
+    {
+      "path": "js/*.js",
+      "maxSize": "200kb"
+    }
+  ],
+  "config": {
+    "performance": {
+      "budget": {
+        "css": "150kb",
+        "js": "200kb",
+        "images": "500kb",
+        "total": "1mb"
+      }
+    },
+    "seo": {
+      "title_length": 60,
+      "description_length": 160,
+      "keywords_count": 15
+    }
+  },
+  "funding": {
+    "type": "patreon",
+    "url": "https://www.patreon.com/businessconsulting"
+  },
+  "private": false
+}

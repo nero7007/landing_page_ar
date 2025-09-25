@@ -1,0 +1,118 @@
+{
+    "name": "استشارات الأعمال الاحترافية | Business Consulting",
+    "short_name": "استشارات الأعمال",
+    "description": "نقدم خدمات استشارية احترافية للشركات والأعمال مع خبرة 15+ سنة. استراتيجية الأعمال، التخطيط المالي، تطوير العمليات، والتسويق الرقمي.",
+    "lang": "ar",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "orientation": "portrait-primary",
+    "theme_color": "#2563eb",
+    "background_color": "#ffffff",
+    "dir": "rtl",
+    "categories": ["business", "consulting", "productivity"],
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable any"
+        },
+        {
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable any"
+        },
+        {
+            "src": "/apple-touch-icon.png",
+            "sizes": "180x180",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/favicon-32x32.png",
+            "sizes": "32x32",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/favicon-16x16.png",
+            "sizes": "16x16",
+            "type": "image/png",
+            "purpose": "any"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "خدماتنا",
+            "short_name": "الخدمات",
+            "description": "استكشف خدماتنا الاستشارية",
+            "url": "/#services",
+            "icons": [
+                {
+                    "src": "/images/shortcut-services.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "تواصل معنا",
+            "short_name": "اتصل",
+            "description": "تواصل معنا للحصول على استشارة",
+            "url": "/#contact",
+            "icons": [
+                {
+                    "src": "/images/shortcut-contact.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "من نحن",
+            "short_name": "عنا",
+            "description": "تعرف على شركتنا",
+            "url": "/#about",
+            "icons": [
+                {
+                    "src": "/images/shortcut-about.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/images/screenshot-wide.png",
+            "sizes": "2880x1800",
+            "type": "image/png",
+            "form_factor": "wide"
+        },
+        {
+            "src": "/images/screenshot-narrow.png",
+            "sizes": "1080x1920",
+            "type": "image/png",
+            "form_factor": "narrow"
+        }
+    ],
+    "prefer_related_applications": false,
+    "edge_side_panel": {
+        "preferred_width": 480
+    },
+    "launch_handler": {
+        "client_mode": ["navigate-existing", "auto"]
+    },
+    "display_override": ["window-controls-overlay", "standalone"],
+    "protocol_handlers": [
+        {
+            "protocol": "mailto",
+            "url": "/#contact?email=%s"
+        },
+        {
+            "protocol": "tel",
+            "url": "/#contact?phone=%s"
+        }
+    ],
+    "handle_links": "preferred",
+    "capture_links": "existing-client-navigate"
+}

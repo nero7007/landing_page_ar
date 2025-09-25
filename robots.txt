@@ -1,0 +1,27 @@
+# استشارات الأعمال الاحترافية | Business Consulting
+User-agent: *
+Allow: /
+
+# الصفحات الرئيسية المهمة
+Allow: /index.html
+Allow: /#services
+Allow: /#about
+Allow: /#contact
+Allow: /#portfolio
+
+# الموارد الثابتة
+Allow: /css/
+Allow: /js/
+Allow: /images/
+
+# منع الوصول للملفات الحساسة
+Disallow: /sw.js
+Disallow: /.well-known/
+Disallow: /admin/
+Disallow: /private/
+
+# خريطة الموقع
+Sitemap: https://business-consulting.example.com/sitemap.xml
+
+# معدل الزحف (اختياري)
+Crawl-delay: 1

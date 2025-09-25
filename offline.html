@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>غير متصل بالإنترنت | استشارات الأعمال</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --text-color: #1e293b;
+            --bg-color: #f8fafc;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .offline-container {
+            max-width: 600px;
+            background: white;
+            border-radius: 1rem;
+            padding: 3rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .offline-icon {
+            width: 120px;
+            height: 120px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 3rem;
+            color: white;
+        }
+        
+        .offline-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+        
+        .offline-message {
+            font-size: 1.125rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            color: #64748b;
+        }
+        
+        .retry-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 1rem;
+        }
+        
+        .retry-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+        
+        .home-btn {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .network-status {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #f1f5f9;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+        }
+        
+        .status-online {
+            color: #059669;
+        }
+        
+        .status-offline {
+            color: #dc2626;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .loading {
+            animation: pulse 1.5s infinite;
+        }
+        
+        @media (max-width: 480px) {
+            .offline-container {
+                padding: 2rem 1rem;
+            }
+            
+            .offline-title {
+                font-size: 1.5rem;
+            }
+            
+            .retry-btn, .home-btn {
+                display: block;
+                width: 100%;
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="offline-icon">
+            <span id="connection-icon">📶</span>
+        </div>
+        
+        <h1 class="offline-title" id="title">غير متصل بالإنترنت</h1>
+        
+        <p class="offline-message" id="message">
+            يبدو أنك غير متصل بالإنترنت حالياً. يرجى التحقق من اتصالك والمحاولة مرة أخرى.
+        </p>
+        
+        <div class="actions">
+            <button class="retry-btn" onclick="retryConnection()" id="retry-btn">
+                إعادة المحاولة
+            </button>
+            <a href="/" class="home-btn" onclick="goHome()">العودة للرئيسية</a>
+        </div>
+        
+        <div class="network-status" id="network-status">
+            <span id="status-text" class="status-offline">⚠️ غير متصل بالإنترنت</span>
+        </div>
+    </div>
+
+    <script>
+        // متغيرات الترجمة
+        const translations = {
+            ar: {
+                title: 'غير متصل بالإنترنت',
+                message: 'يبدو أنك غير متصل بالإنترنت حالياً. يرجى التحقق من اتصالك والمحاولة مرة أخرى.',
+                retry: 'إعادة المحاولة',
+                home: 'العودة للرئيسية',
+                connecting: 'جاري الاتصال...',
+                online: '✅ متصل بالإنترنت',
+                offline: '⚠️ غير متصل بالإنترنت'
+            },
+            en: {
+                title: 'You are offline',
+                message: 'It looks like you are not connected to the internet. Please check your connection and try again.',
+                retry: 'Try Again',
+                home: 'Go Home',
+                connecting: 'Connecting...',
+                online: '✅ Connected to Internet',
+                offline: '⚠️ Not connected to Internet'
+            }
+        };
+        
+        // كشف اللغة المحفوظة
+        const savedLang = localStorage.getItem('preferred-language') || 'ar';
+        let currentLang = savedLang;
+        
+        // تطبيق اللغة
+        function applyLanguage(lang) {
+            const t = translations[lang];
+            document.getElementById('title').textContent = t.title;
+            document.getElementById('message').textContent = t.message;
+            document.getElementById('retry-btn').textContent = t.retry;
+            document.querySelector('.home-btn').textContent = t.home;
+            
+            // تغيير اتجاه الصفحة
+            if (lang === 'ar') {
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.documentElement.setAttribute('lang', 'ar');
+            } else {
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.documentElement.setAttribute('lang', 'en');
+            }
+        }
+        
+        // تطبيق اللغة المحفوظة
+        applyLanguage(currentLang);
+        
+        // وظيفة إعادة المحاولة
+        function retryConnection() {
+            const retryBtn = document.getElementById('retry-btn');
+            const icon = document.getElementById('connection-icon');
+            const t = translations[currentLang];
+            
+            retryBtn.textContent = t.connecting;
+            retryBtn.classList.add('loading');
+            retryBtn.disabled = true;
+            icon.textContent = '🔄';
+            
+            setTimeout(() => {
+                // محاولة إعادة تحميل الصفحة
+                window.location.reload();
+            }, 1500);
+        }
+        
+        // وظيفة العودة للرئيسية
+        function goHome() {
+            window.location.href = '/';
+        }
+        
+        // مراقبة حالة الاتصال
+        function updateNetworkStatus() {
+            const statusElement = document.getElementById('status-text');
+            const icon = document.getElementById('connection-icon');
+            const t = translations[currentLang];
+            
+            if (navigator.onLine) {
+                statusElement.textContent = t.online;
+                statusElement.className = 'status-online';
+                icon.textContent = '📶';
+                
+                // إعادة تحميل الصفحة بعد ثانيتين من استعادة الاتصال
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
+            } else {
+                statusElement.textContent = t.offline;
+                statusElement.className = 'status-offline';
+                icon.textContent = '📵';
+            }
+        }
+        
+        // مراقبة تغيير حالة الاتصال
+        window.addEventListener('online', updateNetworkStatus);
+        window.addEventListener('offline', updateNetworkStatus);
+        
+        // فحص حالة الاتصال عند التحميل
+        updateNetworkStatus();
+        
+        // مراقبة التحديثات من Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.addEventListener('message', event => {
+                if (event.data.type === 'CACHE_UPDATED') {
+                    // إشعار المستخدم بأن النسخة المحدثة متاحة
+                    const message = document.getElementById('message');
+                    message.innerHTML += '<br><br><em>📦 تم تحديث الموقع. سيتم إعادة التحميل تلقائياً...</em>';
+                    
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 3000);
+                }
+            });
+        }
+        
+        // إضافة محاولة دورية لاستعادة الاتصال
+        setInterval(() => {
+            if (!navigator.onLine) {
+                // محاولة ping بسيط
+                fetch('/', { method: 'HEAD', mode: 'no-cors' })
+                    .then(() => {
+                        updateNetworkStatus();
+                    })
+                    .catch(() => {
+                        // لا شيء - نحن غير متصلين
+                    });
+            }
+        }, 10000); // كل 10 ثوانٍ
+        
+        console.log('📱 Offline Page: تم تحميل صفحة عدم الاتصال / Offline page loaded');
+    </script>
+</body>
+</html>
