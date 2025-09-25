@@ -1,0 +1,992 @@
+/* ===========================
+   التصميم المتجاوب المتقدم
+   Advanced Responsive Design
+   =========================== */
+
+/* Container Queries للمتصفحات الحديثة */
+@supports (container-type: inline-size) {
+  .card-container {
+    container-type: inline-size;
+  }
+  
+  @container (min-width: 300px) {
+    .card {
+      padding: 1.5rem;
+    }
+  }
+}
+
+/* ===========================
+   1. نقاط التوقف المخصصة
+   Custom Breakpoints
+   =========================== */
+:root {
+  --breakpoint-xs: 0px;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-xxl: 1400px;
+  
+  /* Fluid Typography */
+  --fluid-min-width: 320;
+  --fluid-max-width: 1200;
+  --fluid-screen: 100vw;
+  --fluid-bp: calc((var(--fluid-screen) - var(--fluid-min-width) / 16 * 1rem) / (var(--fluid-max-width) - var(--fluid-min-width)));
+}
+
+/* ===========================
+   2. الشاشات الكبيرة جداً (XXL)
+   Extra Extra Large Screens
+   =========================== */
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1320px;
+  }
+  
+  .hero-title {
+    font-size: 4rem;
+  }
+  
+  .section-title {
+    font-size: 3.5rem;
+  }
+  
+  .hero-content {
+    padding-right: 3rem;
+  }
+  
+  html[lang="en"] .hero-content {
+    padding-right: 0;
+    padding-left: 3rem;
+  }
+  
+  .stat-card {
+    padding: 3rem;
+  }
+  
+  .service-icon {
+    width: 90px;
+    height: 90px;
+    font-size: 2.2rem;
+  }
+}
+
+/* ===========================
+   3. الشاشات الكبيرة (XL)
+   Extra Large Screens
+   =========================== */
+@media (max-width: 1199.98px) {
+  .hero-title {
+    font-size: 3.5rem;
+  }
+  
+  .section-title {
+    font-size: 3rem;
+  }
+  
+  .floating-card {
+    width: 250px;
+  }
+  
+  .floating-element {
+    width: 100px;
+  }
+  
+  .stats-grid {
+    gap: 1rem;
+  }
+  
+  .stat-card {
+    padding: 1.5rem;
+  }
+}
+
+/* ===========================
+   4. الشاشات المتوسطة الكبيرة (LG)
+   Large Screens
+   =========================== */
+@media (max-width: 991.98px) {
+  .section-padding {
+    padding: 60px 0;
+  }
+  
+  .hero-title {
+    font-size: 3rem;
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-content {
+    text-align: center;
+    padding-right: 0;
+    margin-bottom: 3rem;
+  }
+  
+  .about-content {
+    padding-right: 0;
+    margin-bottom: 3rem;
+  }
+  
+  .floating-card {
+    position: static;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto 2rem;
+    animation: none;
+  }
+  
+  .floating-element {
+    position: static;
+    width: auto;
+    margin: 0 auto;
+    animation: none;
+  }
+  
+  .hero-bg-shape {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .portfolio-filters {
+    text-align: center;
+  }
+  
+  .portfolio-filters .btn {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* ===========================
+   5. الشاشات المتوسطة (MD)
+   Medium Screens
+   =========================== */
+@media (max-width: 767.98px) {
+  .section-padding {
+    padding: 50px 0;
+  }
+  
+  .hero-title {
+    font-size: 2.5rem;
+    line-height: 1.3;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .hero-stats {
+    margin: 1.5rem 0;
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .hero-buttons .btn {
+    width: 100%;
+    max-width: 280px;
+  }
+  
+  .navbar-brand {
+    font-size: 1.1rem;
+  }
+  
+  .nav-link {
+    padding: 0.75rem 0;
+    text-align: center;
+  }
+  
+  .navbar-nav {
+    text-align: center;
+    padding: 1rem 0;
+  }
+  
+  .navbar-collapse {
+    border-top: 1px solid var(--border-primary);
+    margin-top: 1rem;
+    padding-top: 1rem;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .stat-card {
+    padding: 2rem 1rem;
+  }
+  
+  .features-list {
+    margin-top: 1.5rem;
+  }
+  
+  .feature-item {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem;
+  }
+  
+  .feature-icon {
+    margin-bottom: 1rem;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  html[lang="ar"] .feature-icon {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  .service-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+  
+  .portfolio-filters .btn-group {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .portfolio-filters .btn {
+    margin: 0.25rem;
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .testimonial-card {
+    margin-bottom: 2rem;
+  }
+  
+  .contact-item {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .contact-icon {
+    margin-bottom: 1rem;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  .scroll-indicator {
+    display: none;
+  }
+  
+  .btn-floating {
+    right: 20px;
+    bottom: 20px;
+    width: 45px;
+    height: 45px;
+  }
+}
+
+/* ===========================
+   6. الشاشات الصغيرة (SM)
+   Small Screens
+   =========================== */
+@media (max-width: 575.98px) {
+  .section-padding {
+    padding: 40px 0;
+  }
+  
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .section-title {
+    font-size: 1.75rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.95rem;
+  }
+  
+  .container {
+    padding: 0 20px;
+  }
+  
+  .navbar {
+    padding: 0.5rem 0;
+  }
+  
+  .navbar-brand {
+    font-size: 1rem;
+  }
+  
+  .navbar-brand i {
+    display: none;
+  }
+  
+  .hero-stats .col-4 {
+    margin-bottom: 1rem;
+  }
+  
+  .stat-number {
+    font-size: 1.75rem;
+  }
+  
+  .stat-label {
+    font-size: 0.75rem;
+  }
+  
+  .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+  }
+  
+  .lead {
+    font-size: 1rem;
+  }
+  
+  .card-body {
+    padding: 1.5rem;
+  }
+  
+  .stat-card {
+    padding: 1.5rem 1rem;
+  }
+  
+  .stat-value {
+    font-size: 2rem;
+  }
+  
+  .service-card .card-body {
+    padding: 2rem 1.5rem;
+  }
+  
+  .service-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.25rem;
+  }
+  
+  .portfolio-image {
+    height: 150px;
+  }
+  
+  .portfolio-filters .btn {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.7rem;
+    margin: 0.15rem;
+  }
+  
+  .testimonial-card .card-body {
+    padding: 2rem 1.5rem;
+  }
+  
+  .author-avatar {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .contact-form .card-body {
+    padding: 2rem 1.5rem;
+  }
+  
+  .form-control,
+  .form-select {
+    padding: 0.6rem 0.8rem;
+  }
+  
+  .btn-lg {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+  
+  .footer {
+    text-align: center;
+  }
+  
+  .footer .row > div {
+    margin-bottom: 2rem;
+  }
+  
+  .footer-social .d-flex {
+    justify-content: center;
+  }
+  
+  .footer-bottom .row > div {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .modal-dialog {
+    margin: 1rem;
+  }
+  
+  .modal-lg {
+    max-width: calc(100% - 2rem);
+  }
+}
+
+/* ===========================
+   7. الشاشات الصغيرة جداً (XS)
+   Extra Small Screens
+   =========================== */
+@media (max-width: 399.98px) {
+  .hero-title {
+    font-size: 1.75rem;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+  }
+  
+  .container {
+    padding: 0 15px;
+  }
+  
+  .hero-buttons .btn {
+    font-size: 0.9rem;
+    padding: 0.7rem 1.2rem;
+  }
+  
+  .service-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 1.1rem;
+  }
+  
+  .portfolio-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem;
+  }
+  
+  .portfolio-filters .btn {
+    flex: 0 1 auto;
+    min-width: auto;
+    white-space: nowrap;
+  }
+  
+  .contact-form .card-body {
+    padding: 1.5rem 1rem;
+  }
+  
+  .floating-card {
+    max-width: 250px;
+  }
+}
+
+/* ===========================
+   8. تحسينات خاصة للشاشات العمودية
+   Portrait Orientation Optimizations
+   =========================== */
+@media (orientation: portrait) and (max-width: 768px) {
+  .hero-section {
+    min-height: 90vh;
+  }
+  
+  .hero-image {
+    margin-top: 2rem;
+  }
+  
+  .stats-grid {
+    margin-top: 2rem;
+  }
+}
+
+/* ===========================
+   9. تحسينات للشاشات العريضة
+   Landscape Orientation Optimizations
+   =========================== */
+@media (orientation: landscape) and (max-height: 600px) {
+  .hero-section {
+    min-height: 100vh;
+  }
+  
+  .section-padding {
+    padding: 60px 0;
+  }
+  
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-stats {
+    margin: 1rem 0;
+  }
+}
+
+/* ===========================
+   10. تحسينات للأجهزة اللوحية
+   Tablet Optimizations
+   =========================== */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .hero-title {
+    font-size: 3.2rem;
+  }
+  
+  .floating-card {
+    width: 220px;
+    right: 5%;
+  }
+  
+  .floating-element {
+    width: 90px;
+    left: 5%;
+  }
+  
+  .portfolio-filters .btn {
+    margin: 0.25rem 0.1rem;
+  }
+  
+  .testimonial-card {
+    height: auto;
+    min-height: 300px;
+  }
+}
+
+/* ===========================
+   10.5. تحسينات للأجهزة القابلة للطي
+   Foldable Devices Optimizations
+   =========================== */
+@media (screen-spanning: single-fold-vertical) {
+  .hero-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (screen-spanning: single-fold-horizontal) {
+  .hero-section {
+    padding-top: env(fold-top);
+    padding-bottom: env(fold-bottom);
+  }
+}
+
+/* ===========================
+   11. تحسينات اللمس
+   Touch Optimizations
+   =========================== */
+@media (hover: none) and (pointer: coarse) {
+  .btn,
+  .nav-link,
+  .card {
+    transition: none;
+  }
+  
+  .btn:hover,
+  .card:hover,
+  .service-card:hover,
+  .testimonial-card:hover,
+  .stat-card:hover {
+    transform: none;
+  }
+  
+  .nav-link::after {
+    display: none;
+  }
+  
+  .portfolio-overlay {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.6);
+  }
+  
+  .floating-card,
+  .floating-element {
+    animation: none;
+  }
+  
+  /* زيادة المناطق القابلة للمس */
+  .btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .nav-link {
+    padding: 1rem 0.5rem;
+  }
+  
+  .btn-floating {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+/* ===========================
+   12. تحسينات الطباعة
+   Print Optimizations
+   =========================== */
+@media print {
+  .navbar,
+  .btn-floating,
+  .scroll-indicator,
+  .loading-screen,
+  #theme-toggle,
+  #language-toggle,
+  .portfolio-overlay,
+  .footer-social {
+    display: none !important;
+  }
+  
+  .hero-section {
+    min-height: auto;
+    page-break-after: always;
+  }
+  
+  .section-padding {
+    padding: 20px 0;
+  }
+  
+  .card,
+  .service-card,
+  .testimonial-card,
+  .stat-card {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+  
+  .btn {
+    background: transparent !important;
+    color: #000 !important;
+    border: 1px solid #000 !important;
+  }
+  
+  .text-primary {
+    color: #000 !important;
+  }
+  
+  .bg-primary,
+  .bg-success,
+  .bg-warning,
+  .bg-danger,
+  .bg-info {
+    background: transparent !important;
+    color: #000 !important;
+  }
+}
+
+/* ===========================
+   13. تحسينات الحركة المخففة
+   Reduced Motion Preferences
+   =========================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .floating-card,
+  .floating-element,
+  .hero-bg-shape {
+    animation: none !important;
+  }
+  
+  .scroll-down i {
+    animation: none !important;
+  }
+  
+  .spinner {
+    animation: none !important;
+  }
+}
+
+/* ===========================
+   14. تحسينات التباين العالي
+   High Contrast Preferences
+   =========================== */
+@media (prefers-contrast: high) {
+  .btn-outline-primary {
+    border-width: 3px;
+  }
+  
+  .card {
+    border-width: 2px;
+    border-color: #000;
+  }
+  
+  .nav-link::after {
+    height: 3px;
+  }
+  
+  .form-control:focus,
+  .form-select:focus {
+    border-width: 3px;
+  }
+}
+
+/* ===========================
+   15. دعم RTL المتجاوب
+   Responsive RTL Support
+   =========================== */
+html[lang="ar"] .btn-floating {
+  right: auto;
+  left: 30px;
+}
+
+@media (max-width: 767.98px) {
+  html[lang="ar"] .btn-floating {
+    left: 20px;
+  }
+}
+
+html[lang="ar"] .floating-card {
+  right: auto;
+  left: 10%;
+}
+
+html[lang="ar"] .floating-element {
+  left: auto;
+  right: 10%;
+}
+
+@media (max-width: 991.98px) {
+  html[lang="ar"] .floating-card,
+  html[lang="ar"] .floating-element {
+    left: auto;
+    right: auto;
+  }
+}
+
+/* ===========================
+   16. تحسينات الشاشات عالية الكثافة
+   High DPI Screen Optimizations
+   =========================== */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .hero-bg-shape {
+    filter: blur(60px);
+  }
+  
+  .service-icon,
+  .contact-icon,
+  .feature-icon,
+  .author-avatar {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* ===========================
+   17. تحسينات للشاشات الطويلة
+   Tall Screen Optimizations
+   =========================== */
+@media (min-height: 900px) {
+  .hero-section {
+    min-height: 100vh;
+  }
+  
+  .section-padding {
+    padding: 100px 0;
+  }
+}
+
+/* ===========================
+   18. تحسينات للشاشات القصيرة
+   Short Screen Optimizations
+   =========================== */
+@media (max-height: 600px) and (orientation: landscape) {
+  .hero-section {
+    min-height: auto;
+    padding: 60px 0;
+  }
+  
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-stats {
+    margin: 1rem 0;
+  }
+}
+
+/* ===========================
+   18.5. تحسينات الأمان للهواتف
+   Mobile Security Enhancements
+   =========================== */
+@media (max-width: 768px) {
+  /* منع التكبير غير المرغوب فيه */
+  input[type="password"],
+  input[type="email"],
+  input[type="tel"] {
+    font-size: 16px; /* يمنع تكبير iOS Safari */
+  }
+  
+  /* تحسين الخصوصية */
+  .sensitive-data {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+}
+
+/* ===========================
+   19. إصلاحات للمتصفحات القديمة
+   Legacy Browser Fixes
+   =========================== */
+@supports not (backdrop-filter: blur(10px)) {
+  .navbar {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+  }
+  
+  [data-theme="dark"] .navbar {
+    background-color: rgba(15, 23, 42, 0.95) !important;
+  }
+  
+  .stat-item {
+    background: rgba(255, 255, 255, 0.9);
+  }
+}
+
+@supports not (display: grid) {
+  .stats-grid {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .stat-card {
+    flex: 1 1 calc(50% - 1rem);
+    margin: 0.5rem;
+  }
+  
+  @media (max-width: 767.98px) {
+    .stat-card {
+      flex: 1 1 100%;
+    }
+  }
+}
+
+/* Flexbox Gap Fallback */
+@supports not (gap: 1rem) {
+  .d-flex.gap-3 > * {
+    margin-right: 1rem;
+  }
+  
+  .d-flex.gap-3 > *:last-child {
+    margin-right: 0;
+  }
+  
+  html[lang="ar"] .d-flex.gap-3 > * {
+    margin-right: 0;
+    margin-left: 1rem;
+  }
+  
+  html[lang="ar"] .d-flex.gap-3 > *:last-child {
+    margin-left: 0;
+  }
+}
+
+/* CSS Custom Properties Fallbacks */
+@supports not (color: var(--primary-color)) {
+  .btn-primary {
+    background-color: #2563eb;
+    border-color: #2563eb;
+  }
+  
+  .text-primary {
+    color: #2563eb !important;
+  }
+  
+  .bg-primary {
+    background-color: #2563eb !important;
+  }
+}
+
+/* ===========================
+   20. تحسينات الوصول المتجاوب
+   Responsive Accessibility
+   =========================== */
+
+/* تحسين التركيز على الهواتف */
+@media (max-width: 768px) {
+  :focus {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 2px;
+  }
+  
+  .btn:focus {
+    transform: scale(1.05);
+  }
+}
+
+/* تحسين قراءة النصوص */
+@media (max-width: 576px) {
+  body {
+    line-height: 1.7;
+  }
+  
+  .small,
+  small {
+    font-size: 0.9em;
+  }
+}
+
+/* تحسين التباين للهواتف */
+@media (max-width: 768px) and (prefers-contrast: high) {
+  .card {
+    border: 2px solid var(--gray-300);
+  }
+  
+  .btn {
+    border-width: 2px;
+    font-weight: 600;
+  }
+}
+
+/* ===========================
+   21. تحسينات الشاشات المنحنية
+   Curved Display Optimizations
+   =========================== */
+@supports (padding: max(0px)) {
+  .navbar,
+  .hero-section,
+  .footer {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+}
+
+/* ===========================
+   22. تحسينات الطباعة المتجاوبة
+   Responsive Print Optimizations
+   =========================== */
+@media print {
+  @page {
+    margin: 1cm;
+    size: A4;
+  }
+  
+  .hero-section {
+    height: auto;
+    min-height: auto;
+  }
+  
+  .section-padding {
+    padding: 1cm 0;
+  }
+  
+  .card {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}

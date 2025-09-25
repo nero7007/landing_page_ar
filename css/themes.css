@@ -1,0 +1,620 @@
+/* ===========================
+   نظام الثيمات المتقدم
+   Advanced Theme System
+   =========================== */
+
+/* Custom Properties for Theme Transitions */
+:root {
+  --theme-transition-duration: 0.3s;
+  --theme-transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Theme transition animation */
+.theme-transition {
+  transition: background-color var(--theme-transition-duration) var(--theme-transition-easing),
+              color var(--theme-transition-duration) var(--theme-transition-easing),
+              border-color var(--theme-transition-duration) var(--theme-transition-easing);
+}
+
+/* Apply transition to all elements during theme change */
+.theme-switching * {
+  transition: background-color var(--theme-transition-duration) var(--theme-transition-easing),
+              color var(--theme-transition-duration) var(--theme-transition-easing),
+              border-color var(--theme-transition-duration) var(--theme-transition-easing),
+              box-shadow var(--theme-transition-duration) var(--theme-transition-easing) !important;
+}
+
+/* ===========================
+   1. متغيرات الثيم الفاتح
+   Light Theme Variables
+   =========================== */
+[data-theme="light"] {
+  /* الألوان الأساسية - Primary Colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  --bg-glass: rgba(255, 255, 255, 0.8);
+  
+  /* ألوان النص - Text Colors */
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --text-inverse: #ffffff;
+  
+  /* ألوان الحدود - Border Colors */
+  --border-primary: #e2e8f0;
+  --border-secondary: #cbd5e1;
+  --border-focus: #3b82f6;
+  
+  /* ألوان الظلال - Shadow Colors */
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --shadow-color-strong: rgba(0, 0, 0, 0.2);
+  
+  /* ألوان العناصر التفاعلية - Interactive Colors */
+  --hover-bg: #f1f5f9;
+  --active-bg: #e2e8f0;
+  --focus-ring: rgba(59, 130, 246, 0.25);
+}
+
+/* ===========================
+   2. متغيرات الثيم المظلم
+   Dark Theme Variables
+   =========================== */
+[data-theme="dark"] {
+  /* الألوان الأساسية - Primary Colors */
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-tertiary: #334155;
+  --bg-glass: rgba(15, 23, 42, 0.8);
+  
+  /* ألوان النص - Text Colors */
+  --text-primary: #f8fafc;
+  --text-secondary: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-inverse: #0f172a;
+  
+  /* ألوان الحدود - Border Colors */
+  --border-primary: #334155;
+  --border-secondary: #475569;
+  --border-focus: #3b82f6;
+  
+  /* ألوان الظلال - Shadow Colors */
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --shadow-color-strong: rgba(0, 0, 0, 0.5);
+  
+  /* ألوان العناصر التفاعلية - Interactive Colors */
+  --hover-bg: #334155;
+  --active-bg: #475569;
+  --focus-ring: rgba(59, 130, 246, 0.4);
+}
+
+/* ===========================
+   3. تطبيق الثيمات على العناصر
+   Apply Themes to Elements
+   =========================== */
+
+/* الخلفيات العامة - General Backgrounds */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.bg-white {
+  background-color: var(--bg-primary) !important;
+}
+
+.bg-light {
+  background-color: var(--bg-secondary) !important;
+}
+
+.text-dark,
+.text-body {
+  color: var(--text-primary) !important;
+}
+
+.text-muted {
+  color: var(--text-muted) !important;
+}
+
+/* ===========================
+   تحسينات الثيم المظلم المتقدمة
+   Advanced Dark Theme Enhancements
+   =========================== */
+
+/* Auto theme based on system preference */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-tertiary: #334155;
+    --bg-glass: rgba(15, 23, 42, 0.8);
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --border-primary: #374151;
+  }
+}
+
+/* Improved scrollbar for dark theme */
+[data-theme="dark"] ::-webkit-scrollbar {
+  width: 8px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--text-secondary);
+  border-radius: 4px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--text-primary);
+}
+
+/* Dark theme form inputs */
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .form-select {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-primary);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .form-control:focus,
+[data-theme="dark"] .form-select:focus {
+  background-color: var(--bg-tertiary);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.25);
+}
+
+[data-theme="dark"] .form-control::placeholder {
+  color: var(--text-muted);
+}
+
+/* Dark theme cards with glass effect */
+[data-theme="dark"] .card {
+  background: var(--bg-glass);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Dark theme navbar */
+[data-theme="dark"] .navbar {
+  background: var(--bg-glass) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Dark theme footer improvements */
+[data-theme="dark"] .footer {
+  background: linear-gradient(135deg, #0c1425 0%, #1e293b 100%);
+}
+
+/* Theme-specific animations */
+@keyframes darkThemeGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(37, 99, 235, 0.3); }
+  50% { box-shadow: 0 0 30px rgba(37, 99, 235, 0.5); }
+}
+
+@keyframes lightThemeGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(37, 99, 235, 0.2); }
+  50% { box-shadow: 0 0 25px rgba(37, 99, 235, 0.3); }
+}
+
+[data-theme="dark"] .btn-primary:hover {
+  animation: darkThemeGlow 2s ease-in-out infinite;
+}
+
+[data-theme="light"] .btn-primary:hover {
+  animation: lightThemeGlow 2s ease-in-out infinite;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  [data-theme="dark"] .btn-primary:hover,
+  [data-theme="light"] .btn-primary:hover {
+    animation: none;
+  }
+}
+
+/* High contrast mode improvements */
+@media (prefers-contrast: high) {
+  [data-theme="dark"] {
+    --text-primary: #ffffff;
+    --text-secondary: #e2e8f0;
+    --border-primary: #64748b;
+  }
+  
+  [data-theme="light"] {
+    --text-primary: #000000;
+    --text-secondary: #333333;
+    --border-primary: #666666;
+  }
+}
+
+/* ===========================
+   4. شريط التنقل
+   Navigation Bar
+   =========================== */
+.navbar {
+  background-color: rgba(var(--bg-primary), 0.95) !important;
+  backdrop-filter: blur(10px);
+}
+
+[data-theme="dark"] .navbar {
+  background-color: rgba(15, 23, 42, 0.95) !important;
+}
+
+[data-theme="light"] .navbar {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.navbar.scrolled {
+  background-color: var(--bg-primary) !important;
+  box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+.navbar-brand,
+.nav-link {
+  color: var(--text-primary) !important;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--primary-color) !important;
+}
+
+/* ===========================
+   5. البطاقات
+   Cards
+   =========================== */
+.card {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-primary);
+  color: var(--text-primary);
+}
+
+.card:hover {
+  box-shadow: 0 10px 15px var(--shadow-color);
+}
+
+/* ===========================
+   6. النماذج
+   Forms
+   =========================== */
+.form-control,
+.form-select {
+  background-color: var(--bg-primary);
+  border-color: var(--border-primary);
+  color: var(--text-primary);
+}
+
+.form-control:focus,
+.form-select:focus {
+  background-color: var(--bg-primary);
+  border-color: var(--border-focus);
+  color: var(--text-primary);
+  box-shadow: 0 0 0 0.2rem var(--focus-ring);
+}
+
+.form-label {
+  color: var(--text-primary);
+}
+
+::placeholder {
+  color: var(--text-muted);
+  opacity: 1;
+}
+
+/* ===========================
+   7. الأزرار
+   Buttons
+   =========================== */
+.btn-outline-secondary {
+  color: var(--text-primary);
+  border-color: var(--border-primary);
+}
+
+.btn-outline-secondary:hover {
+  background-color: var(--hover-bg);
+  border-color: var(--border-secondary);
+  color: var(--text-primary);
+}
+
+/* ===========================
+   8. العناصر التفاعلية
+   Interactive Elements
+   =========================== */
+.dropdown-menu {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-primary);
+  box-shadow: 0 10px 15px var(--shadow-color);
+}
+
+.dropdown-item {
+  color: var(--text-primary);
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: var(--hover-bg);
+  color: var(--text-primary);
+}
+
+/* ===========================
+   9. المودالات
+   Modals
+   =========================== */
+.modal-content {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-primary);
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.modal-footer {
+  border-top: 1px solid var(--border-primary);
+}
+
+.modal-title {
+  color: var(--text-primary);
+}
+
+.btn-close {
+  filter: var(--text-primary);
+}
+
+[data-theme="dark"] .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+/* ===========================
+   10. قسم البطل
+   Hero Section
+   =========================== */
+.hero-section {
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 50%, var(--bg-secondary) 100%);
+}
+
+.stat-item {
+  background: rgba(var(--bg-primary), 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-primary);
+}
+
+[data-theme="dark"] .stat-item {
+  background: rgba(30, 41, 59, 0.8);
+}
+
+[data-theme="light"] .stat-item {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.floating-card {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-primary);
+  box-shadow: 0 20px 25px var(--shadow-color);
+}
+
+/* ===========================
+   11. الإحصائيات
+   Statistics
+   =========================== */
+.stat-card {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-primary);
+  box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+.stat-card:hover {
+  box-shadow: 0 20px 25px var(--shadow-color);
+}
+
+/* ===========================
+   12. قوائم الميزات
+   Feature Lists
+   =========================== */
+.feature-item:hover {
+  background-color: var(--hover-bg);
+}
+
+/* ===========================
+   13. المعرض
+   Portfolio
+   =========================== */
+.portfolio-filters .btn.active {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--white);
+}
+
+.image-placeholder {
+  border: 1px solid var(--border-primary);
+}
+
+/* ===========================
+   14. التذييل
+   Footer
+   =========================== */
+.footer {
+  background: linear-gradient(135deg, var(--gray-900) 0%, var(--gray-800) 100%);
+}
+
+[data-theme="dark"] .footer {
+  background: linear-gradient(135deg, #000000 0%, var(--gray-900) 100%);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ===========================
+   15. انتقال الثيم
+   Theme Transition
+   =========================== */
+*,
+*::before,
+*::after {
+  transition: 
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* تعطيل الانتقال أثناء تغيير الثيم */
+.theme-transition,
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+  transition: none !important;
+}
+
+/* ===========================
+   16. ايقونة الثيم
+   Theme Icon
+   =========================== */
+#theme-toggle {
+  position: relative;
+  overflow: hidden;
+}
+
+#theme-icon {
+  transition: transform 0.3s ease;
+}
+
+.theme-switching #theme-icon {
+  transform: rotate(180deg);
+}
+
+/* ===========================
+   17. تحسينات للثيم المظلم
+   Dark Theme Enhancements
+   =========================== */
+[data-theme="dark"] {
+  /* تحسين التباين */
+  --primary-color: #60a5fa;
+  --primary-dark: #3b82f6;
+  --success-color: #34d399;
+  --warning-color: #fbbf24;
+  --danger-color: #f87171;
+  --info-color: #22d3ee;
+}
+
+[data-theme="dark"] .hero-bg-shape {
+  background: linear-gradient(135deg, rgba(96, 165, 250, 0.15), rgba(59, 130, 246, 0.1));
+}
+
+[data-theme="dark"] .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28248, 250, 252, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* ===========================
+   18. تحسينات إضافية
+   Additional Enhancements
+   =========================== */
+
+/* تحسين قراءة النصوص في الثيم المظلم */
+[data-theme="dark"] .lead {
+  color: var(--text-secondary);
+}
+
+[data-theme="dark"] .text-muted {
+  color: #94a3b8 !important;
+}
+
+/* تحسين الحدود في الثيم المظلم */
+[data-theme="dark"] .border,
+[data-theme="dark"] .border-top,
+[data-theme="dark"] .border-bottom,
+[data-theme="dark"] .border-start,
+[data-theme="dark"] .border-end {
+  border-color: var(--border-primary) !important;
+}
+
+/* تحسين الخلفيات الشفافة */
+[data-theme="dark"] .bg-light {
+  background-color: var(--bg-secondary) !important;
+}
+
+[data-theme="dark"] .bg-white {
+  background-color: var(--bg-primary) !important;
+}
+
+/* تحسين الأيقونات */
+[data-theme="dark"] .fas,
+[data-theme="dark"] .far,
+[data-theme="dark"] .fab {
+  opacity: 0.9;
+}
+
+/* تحسين التركيز */
+[data-theme="dark"] *:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* ===========================
+   19. حالات خاصة
+   Special Cases
+   =========================== */
+
+/* شاشة التحميل */
+[data-theme="dark"] .loading-screen {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+}
+
+/* مؤشرات التقدم */
+[data-theme="dark"] .progress {
+  background-color: var(--bg-tertiary);
+}
+
+/* الجداول */
+[data-theme="dark"] .table {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .table-striped > tbody > tr:nth-of-type(odd) > td,
+[data-theme="dark"] .table-striped > tbody > tr:nth-of-type(odd) > th {
+  background-color: var(--bg-secondary);
+}
+
+/* ===========================
+   20. وسائط الاستعلام للثيمات
+   Media Queries for Themes
+   =========================== */
+
+/* دعم تفضيل النظام للثيم المظلم */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-tertiary: #334155;
+    --text-primary: #f8fafc;
+    --text-secondary: #e2e8f0;
+    --text-muted: #94a3b8;
+    --border-primary: #334155;
+    --border-secondary: #475569;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --hover-bg: #334155;
+    --active-bg: #475569;
+  }
+}
+
+/* تحسينات للطباعة */
+@media print {
+  [data-theme="dark"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --text-primary: #000000;
+    --text-secondary: #333333;
+  }
+}
